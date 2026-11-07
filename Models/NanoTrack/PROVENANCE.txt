@@ -1,0 +1,10 @@
+NanoTrack V2 models used in the iOS manual physical-object tracker.
+Original source: https://github.com/HonglinChu/SiamTrackers/tree/248663fde6bf7c40190cf10ee396d5662919ecd3/NanoTrack
+Copied byte-for-byte from gimbal_android 9c722f1, camera/src/debug/assets/moving-sot.
+search.onnx and head.onnx are the upstream V2 search backbone and head.
+template.onnx is the 127-pixel input backbone from the Android template path.
+SHA-256:
+template.onnx 9b0034c3ce464af75eff207fdfdeb0f51a8c79510b2802357c8cfc7071671cfe
+search.onnx   530bdd0cd00f19afab79a863e71ba71e3312395a5dc9151af675082bdaaa2fc4
+head.onnx     0d8c0637be849f092cc7236cae02e55c8b9455ebe37ba50601d6115db4247cd9
+The accompanying upstream Apache-2.0 LICENSE is distributed with the weights.

@@ -1,0 +1,461 @@
+{
+  "baseline_version": "1.1.5",
+  "baseline_commit": "88a19b6f69723e4f02321d6cdd832c884fe05b05",
+  "files": [
+    {
+      "source": "GimbalScreenFollowCore/ScreenFollowModels.swift",
+      "destination": "Sources/GimbalTracking/ScreenFollowModels.swift",
+      "source_sha256": "6509e0d713b8ccd8b9e780844b4a983a21edb9a740086a172d2a0ebae6433c98",
+      "export_sha256": "11ff79880d11aed5eb56bc10ba2f7122536cd83a1c115ab58a75a4090b186a04",
+      "modified": true
+    },
+    {
+      "source": "GimbalScreenFollowCore/ScreenFollowController.swift",
+      "destination": "Sources/GimbalTracking/ScreenFollowController.swift",
+      "source_sha256": "80912a38e9dd3ad9ea1158b7cd3af428a532f372408d7a3f60820a0f56eca71a",
+      "export_sha256": "80912a38e9dd3ad9ea1158b7cd3af428a532f372408d7a3f60820a0f56eca71a",
+      "modified": false
+    },
+    {
+      "source": "GimbalScreenFollowCore/ScreenFollowStore.swift",
+      "destination": "Sources/GimbalTracking/ScreenFollowStore.swift",
+      "source_sha256": "7c038569fd2ebf3ef326b91da8ea4b90b3e48edf53736c6afc0426fabe995ad1",
+      "export_sha256": "7c038569fd2ebf3ef326b91da8ea4b90b3e48edf53736c6afc0426fabe995ad1",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/CrossAppTracking/ScreenFollowFaceAnalyzer.swift",
+      "destination": "Sources/GimbalTracking/ScreenFollowFaceAnalyzer.swift",
+      "source_sha256": "fc9b57a497a7db453afbb96d3e18c30c4fdc326e70316323951b6578779b7120",
+      "export_sha256": "f179f33af4ae2feac529db88ad84060e583b7588fde95e9e6b6e22e8cdb76d44",
+      "modified": true
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/CoreMLObjectDetector.swift",
+      "destination": "Sources/GimbalTracking/CoreMLObjectDetector.swift",
+      "source_sha256": "284360e6cfa43c8b7ec569c9fed320d862b99f2bc46a45df4768b81d2be17c21",
+      "export_sha256": "284360e6cfa43c8b7ec569c9fed320d862b99f2bc46a45df4768b81d2be17c21",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/ObjectDetectionTypes.swift",
+      "destination": "Sources/GimbalTracking/ObjectDetectionTypes.swift",
+      "source_sha256": "f984758ec7fa266feb6a9b7f2f35caa6b4b494a0de7ea357e93f94c24c127f12",
+      "export_sha256": "f46e179f1aa3c4863d6686802031851ef6176b3da5ff4a474327dab9462ba10b",
+      "modified": true
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/ObjectTrackingCoordinator.swift",
+      "destination": "Sources/GimbalTracking/ObjectTrackingCoordinator.swift",
+      "source_sha256": "560550ce1d38fa37b6ded6d0de589ffa3fefbcc614262036ddc7cc26b19c4174",
+      "export_sha256": "560550ce1d38fa37b6ded6d0de589ffa3fefbcc614262036ddc7cc26b19c4174",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/ObjectTrackingDiagnostics.swift",
+      "destination": "Sources/GimbalTracking/ObjectTrackingDiagnostics.swift",
+      "source_sha256": "ff4d4bdd2b95abc92eac0f70617b9de3861ec061cf997561fca73ebee89e756f",
+      "export_sha256": "ff4d4bdd2b95abc92eac0f70617b9de3861ec061cf997561fca73ebee89e756f",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/ObjectTrackingPolicy.swift",
+      "destination": "Sources/GimbalTracking/ObjectTrackingPolicy.swift",
+      "source_sha256": "ee085df2e7fc9ab000f9cc6c17501f78fe732d7096eeeb98d46b5151b1fad9a8",
+      "export_sha256": "ee085df2e7fc9ab000f9cc6c17501f78fe732d7096eeeb98d46b5151b1fad9a8",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/MediaPipeObjectDetector.swift",
+      "destination": "Sources/GimbalTracking/MediaPipeObjectDetector.swift",
+      "source_sha256": "38c89237e2f5059df5c051e40352cd5b01d63658db3cda603d2edf4f28e0d16b",
+      "export_sha256": "aa79d4501d3cc91b75383eb9090dcac8c34a0138b4760250c58268c02d833952",
+      "modified": true
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/CMNanoTrackTracker.h",
+      "destination": "NativeTracking/CMNanoTrackTracker.h",
+      "source_sha256": "92325249ce66e41128e75f6e62705f57f603db621e714e2c8b5a2d083b6fb88e",
+      "export_sha256": "92325249ce66e41128e75f6e62705f57f603db621e714e2c8b5a2d083b6fb88e",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/CMNanoTrackTracker.mm",
+      "destination": "NativeTracking/CMNanoTrackTracker.mm",
+      "source_sha256": "ca97ded5e56891fedb6eefb7684d24e53d9adb3a471256a15d040439e481554f",
+      "export_sha256": "ca97ded5e56891fedb6eefb7684d24e53d9adb3a471256a15d040439e481554f",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/CMNanoTrackAppearance.inc",
+      "destination": "NativeTracking/CMNanoTrackAppearance.inc",
+      "source_sha256": "ee8695ae46cd3d1b0a654e69a8f2abbed810badba74d3a0964c24754ce70a364",
+      "export_sha256": "ee8695ae46cd3d1b0a654e69a8f2abbed810badba74d3a0964c24754ce70a364",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/CMPhysicalObjectPatchTracker.h",
+      "destination": "NativeTracking/CMPhysicalObjectPatchTracker.h",
+      "source_sha256": "020885d76ba294b2cb34ae5db4e1ec064e6c6d220d5bb47a487e6347271c1a5e",
+      "export_sha256": "020885d76ba294b2cb34ae5db4e1ec064e6c6d220d5bb47a487e6347271c1a5e",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/CMPhysicalObjectPatchTracker.mm",
+      "destination": "NativeTracking/CMPhysicalObjectPatchTracker.mm",
+      "source_sha256": "57a4d6d422d87d5ca35340a43a0e20b00d297b846d47db89e0aadc626b1343b7",
+      "export_sha256": "57a4d6d422d87d5ca35340a43a0e20b00d297b846d47db89e0aadc626b1343b7",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/CMPhysicalObjectMotionLandmarks.inc",
+      "destination": "NativeTracking/CMPhysicalObjectMotionLandmarks.inc",
+      "source_sha256": "f2ad5c811de97aacf024f334e20777d4ef9ad2b9ef5af72abd85efba4df58c1d",
+      "export_sha256": "f2ad5c811de97aacf024f334e20777d4ef9ad2b9ef5af72abd85efba4df58c1d",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/CMPhysicalObjectPhotoReference.inc",
+      "destination": "NativeTracking/CMPhysicalObjectPhotoReference.inc",
+      "source_sha256": "9d19dac78bad47ebd1a1e95a07b4376a7668de0bbacfff9667ae017bbd6ef38d",
+      "export_sha256": "9d19dac78bad47ebd1a1e95a07b4376a7668de0bbacfff9667ae017bbd6ef38d",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/DARKNET-LICENSE.txt",
+      "destination": "Models/DARKNET-LICENSE.txt",
+      "source_sha256": "2021f0b8d6426fbf9a2f0126f1e8a7d3b1d7027c871b9979fa2543b9557000c4",
+      "export_sha256": "2021f0b8d6426fbf9a2f0126f1e8a7d3b1d7027c871b9979fa2543b9557000c4",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/DARKNET-META-LICENSE.txt",
+      "destination": "Models/DARKNET-META-LICENSE.txt",
+      "source_sha256": "1a61fff810ecccbd03a7f991eca8548d19410b54e86575beeb3ab2264d66d015",
+      "export_sha256": "1a61fff810ecccbd03a7f991eca8548d19410b54e86575beeb3ab2264d66d015",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/DARKNET-MIT-LICENSE.txt",
+      "destination": "Models/DARKNET-MIT-LICENSE.txt",
+      "source_sha256": "bad0b4ef684a71c8b6a7d0289df0827a86d6a66511173438a3c19c7cec9806ce",
+      "export_sha256": "bad0b4ef684a71c8b6a7d0289df0827a86d6a66511173438a3c19c7cec9806ce",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/MEDIAPIPE-APACHE-2.0.txt",
+      "destination": "Models/MEDIAPIPE-APACHE-2.0.txt",
+      "source_sha256": "8707eef0533987efc5b155d64761eeb6e20793f50b9bd1a68dad1cf4719d0ed8",
+      "export_sha256": "8707eef0533987efc5b155d64761eeb6e20793f50b9bd1a68dad1cf4719d0ed8",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/NOTICE.md",
+      "destination": "Models/NOTICE.md",
+      "source_sha256": "7fdf5b8801f263a42d328c4060666e78869830a1d8cb910e66b9dab9eca8c5af",
+      "export_sha256": "7fdf5b8801f263a42d328c4060666e78869830a1d8cb910e66b9dab9eca8c5af",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/download_models.py",
+      "destination": "Models/download_models.py",
+      "source_sha256": "e56f74cc39c62a7a555632546cd3573dcf8ad0e3d8e835f978a2b9507d1a1580",
+      "export_sha256": "e56f74cc39c62a7a555632546cd3573dcf8ad0e3d8e835f978a2b9507d1a1580",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/models.json",
+      "destination": "Models/models.json",
+      "source_sha256": "c31001ec6714496956b825e528b63ec1872b5613278a9c742eedfec07c932958",
+      "export_sha256": "c31001ec6714496956b825e528b63ec1872b5613278a9c742eedfec07c932958",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/NanoTrack/LICENSE",
+      "destination": "Models/NanoTrack/LICENSE",
+      "source_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "export_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/NanoTrack/PROVENANCE.txt",
+      "destination": "Models/NanoTrack/PROVENANCE.txt",
+      "source_sha256": "7fa75d5648a21bfa0f168d4a7fd8251c5eb08598f15207f2c99694608e22de00",
+      "export_sha256": "7fa75d5648a21bfa0f168d4a7fd8251c5eb08598f15207f2c99694608e22de00",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/NanoTrack/head.onnx",
+      "destination": "Models/NanoTrack/head.onnx",
+      "source_sha256": "0d8c0637be849f092cc7236cae02e55c8b9455ebe37ba50601d6115db4247cd9",
+      "export_sha256": "0d8c0637be849f092cc7236cae02e55c8b9455ebe37ba50601d6115db4247cd9",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/NanoTrack/search.onnx",
+      "destination": "Models/NanoTrack/search.onnx",
+      "source_sha256": "530bdd0cd00f19afab79a863e71ba71e3312395a5dc9151af675082bdaaa2fc4",
+      "export_sha256": "530bdd0cd00f19afab79a863e71ba71e3312395a5dc9151af675082bdaaa2fc4",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/ObjectTracking/Resources/NanoTrack/template.onnx",
+      "destination": "Models/NanoTrack/template.onnx",
+      "source_sha256": "9b0034c3ce464af75eff207fdfdeb0f51a8c79510b2802357c8cfc7071671cfe",
+      "export_sha256": "9b0034c3ce464af75eff207fdfdeb0f51a8c79510b2802357c8cfc7071671cfe",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/CameraManager/CameraManager+FaceTracking.swift",
+      "destination": "Reference/KKGimbal/Camera/CameraManager/CameraManager+FaceTracking.swift",
+      "source_sha256": "90373af8298fa524047ca33f7ef9ef1e49302b89e0e1d8ca0c9e03675de3f1ad",
+      "export_sha256": "90373af8298fa524047ca33f7ef9ef1e49302b89e0e1d8ca0c9e03675de3f1ad",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/CameraManager/CameraManager+Tracking.swift",
+      "destination": "Reference/KKGimbal/Camera/CameraManager/CameraManager+Tracking.swift",
+      "source_sha256": "433a49fc7918ad8289e8fb8d2b0a829bd6a42462477d9849cc7cb824731af981",
+      "export_sha256": "433a49fc7918ad8289e8fb8d2b0a829bd6a42462477d9849cc7cb824731af981",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/CameraManager/CameraManager+ObjectRecognition.swift",
+      "destination": "Reference/KKGimbal/Camera/CameraManager/CameraManager+ObjectRecognition.swift",
+      "source_sha256": "c8cc08bd0851bc0d7ea1dfefafa02e92d1e0926e97ffb313ca5e7ecd2c7df9e6",
+      "export_sha256": "c8cc08bd0851bc0d7ea1dfefafa02e92d1e0926e97ffb313ca5e7ecd2c7df9e6",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/CameraManager/CameraManager.swift",
+      "destination": "Reference/KKGimbal/Camera/CameraManager/CameraManager.swift",
+      "source_sha256": "8e07ccce0d37825af7aab5f20ebd7439e9ae5e43596771c9e467c7ffc34f6c58",
+      "export_sha256": "b9f5a9aa1131c7af09c9c788fbe3711514f3ca89da6ee41123be298f0db08359",
+      "modified": true
+    },
+    {
+      "source": "KKGimbal/Camera/CameraManager/CameraManager+AVCaptureDelegate.swift",
+      "destination": "Reference/KKGimbal/Camera/CameraManager/CameraManager+AVCaptureDelegate.swift",
+      "source_sha256": "a16469b49e71b3ed8e55c2b905ae385771d510c79fe84a05e083df673e915f8d",
+      "export_sha256": "a16469b49e71b3ed8e55c2b905ae385771d510c79fe84a05e083df673e915f8d",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/CrossAppTracking/ScreenFollowMainAccess.swift",
+      "destination": "Reference/KKGimbal/CrossAppTracking/ScreenFollowMainAccess.swift",
+      "source_sha256": "93dd06eeec34ddb02b0f55f4a9d5c0b9f006cc826098f90cf2eb704696162ba4",
+      "export_sha256": "5643094a9891c5444cb62348ab93f4cb15c2d7417dd9d02b5ac6305bbaa2e31b",
+      "modified": true
+    },
+    {
+      "source": "KKGimbal/CrossAppTracking/ScreenFollowViewController.swift",
+      "destination": "Reference/KKGimbal/CrossAppTracking/ScreenFollowViewController.swift",
+      "source_sha256": "a95d26f544900c21368ed09ecb2bb39dfc40eb90af2b1be1db61ee148c0d8a25",
+      "export_sha256": "dc8c1f8558fd5e979fbb49a3fe209033d7fc89abf84c7c0912e75c9c9a422865",
+      "modified": true
+    },
+    {
+      "source": "GimbalScreenFollowBroadcast/SampleHandler.swift",
+      "destination": "Reference/GimbalScreenFollowBroadcast/SampleHandler.swift",
+      "source_sha256": "4a99f5730e00f0dea414e1ba4144078d74770bded024ca0672a4cf49f02be267",
+      "export_sha256": "741384440e2d3a072d23101953b90f6893d099b102871ec229d8d760a4aabdbe",
+      "modified": true
+    },
+    {
+      "source": "GimbalScreenFollowBroadcast/ScreenFollowFrameAdapter.swift",
+      "destination": "Reference/GimbalScreenFollowBroadcast/ScreenFollowFrameAdapter.swift",
+      "source_sha256": "959222e79006ce971e457d52f00d87dc78ae9a8b9cd19bd9ebb13920372da8c6",
+      "export_sha256": "959222e79006ce971e457d52f00d87dc78ae9a8b9cd19bd9ebb13920372da8c6",
+      "modified": false
+    },
+    {
+      "source": "GimbalScreenFollowBroadcast/Info.plist",
+      "destination": "Reference/GimbalScreenFollowBroadcast/Info.plist",
+      "source_sha256": "f932a0fd560d9ce8cfde2f830b05623cf71aaed5ac763bfe2cdfabdca954cb25",
+      "export_sha256": "3177bf6b44242febe714ccc5814e9ee1bd57fab037abd825e115d712abf843c7",
+      "modified": true
+    },
+    {
+      "source": "GimbalScreenFollowBroadcast/ScreenFollow.entitlements",
+      "destination": "Reference/GimbalScreenFollowBroadcast/ScreenFollow.entitlements",
+      "source_sha256": "077fb6ed4ef3b2c95a22c3d7e6d439b7171fef51b21bc269775a5115290d81d8",
+      "export_sha256": "7dfdb07c0ea42637cd8de05acaa42213cb6b41284678d0c08bb416976bd06b89",
+      "modified": true
+    },
+    {
+      "source": "KKGimbal/ScreenFollow.entitlements",
+      "destination": "Reference/KKGimbal/ScreenFollow.entitlements",
+      "source_sha256": "077fb6ed4ef3b2c95a22c3d7e6d439b7171fef51b21bc269775a5115290d81d8",
+      "export_sha256": "7dfdb07c0ea42637cd8de05acaa42213cb6b41284678d0c08bb416976bd06b89",
+      "modified": true
+    },
+    {
+      "source": "KKGimbal/Common/Tool/KKBLEManager.swift",
+      "destination": "Reference/KKGimbal/Common/Tool/KKBLEManager.swift",
+      "source_sha256": "1b5a2749915ffbe71cb4afbcd14bf037cbce308fbde36f5e16c7e62d697bc9e9",
+      "export_sha256": "2b6a62cca26d1f224d47977fb964c5bb8510496241fc081452facb691b8eb546",
+      "modified": true
+    },
+    {
+      "source": "tools/build_opencv_stitching_xcframework.sh",
+      "destination": "scripts/build_opencv.sh",
+      "source_sha256": "bc3eab24de4b2a3958f4482782c3a8f324516081cb41f6004265e3447a2d7c87",
+      "export_sha256": "b5cc423f0888a9ad1d6a83cc39270514fe1d087eb0ae233eb134e5ce0f205e1b",
+      "modified": true
+    },
+    {
+      "source": "scripts/ScreenFollowCoreSmoke.swift",
+      "destination": "scripts/ScreenFollowCoreSmoke.swift",
+      "source_sha256": "4e12167db9e4292e0d5cb3b85f388d7c17ef5ac8caaa2c0d20a939c8d8c4a4f1",
+      "export_sha256": "4e12167db9e4292e0d5cb3b85f388d7c17ef5ac8caaa2c0d20a939c8d8c4a4f1",
+      "modified": false
+    },
+    {
+      "source": "scripts/ScreenFollowCadenceSmoke.swift",
+      "destination": "scripts/ScreenFollowCadenceSmoke.swift",
+      "source_sha256": "ecb45cecf80be9d981fe4aee0eb311790a075bd89c55e536aec5b913d0318c4d",
+      "export_sha256": "ecb45cecf80be9d981fe4aee0eb311790a075bd89c55e536aec5b913d0318c4d",
+      "modified": false
+    },
+    {
+      "source": "scripts/ScreenFollowSourceTimingSmoke.swift",
+      "destination": "scripts/ScreenFollowSourceTimingSmoke.swift",
+      "source_sha256": "37112f955be16b343290236734b905f43b2d30f32d083fc01b11dec806a50df7",
+      "export_sha256": "37112f955be16b343290236734b905f43b2d30f32d083fc01b11dec806a50df7",
+      "modified": false
+    },
+    {
+      "source": "scripts/ScreenFollowStoreSmoke.swift",
+      "destination": "scripts/ScreenFollowStoreSmoke.swift",
+      "source_sha256": "de48cfe1fc6f71840096f93f8e0bcf7f395fd3d30b7b7af9374ea839e342e97a",
+      "export_sha256": "95a47f88dace90905d116e47c0c39824aebdf3cc94dd53dae627e716acab79d5",
+      "modified": true
+    },
+    {
+      "source": "scripts/ScreenFollowVisionSmoke.swift",
+      "destination": "scripts/ScreenFollowVisionSmoke.swift",
+      "source_sha256": "c0bd28ebb8f7ab8510260847cf8115abdd77042c7c5b59f702772b176c664ebd",
+      "export_sha256": "c0bd28ebb8f7ab8510260847cf8115abdd77042c7c5b59f702772b176c664ebd",
+      "modified": false
+    },
+    {
+      "source": "scripts/ScreenFollowAsyncVisionSmoke.swift",
+      "destination": "scripts/ScreenFollowAsyncVisionSmoke.swift",
+      "source_sha256": "b479b219af7cdfe8ae1d69b4ea77f91656f5241a4dd901b6335abceb5a89eca1",
+      "export_sha256": "b479b219af7cdfe8ae1d69b4ea77f91656f5241a4dd901b6335abceb5a89eca1",
+      "modified": false
+    },
+    {
+      "source": "scripts/ScreenFollowDetectorComputeSmoke.swift",
+      "destination": "scripts/ScreenFollowDetectorComputeSmoke.swift",
+      "source_sha256": "443c4d3c9f4bb0e7efeeff8f73e657a02e59961de19645b4407419e94cdb770f",
+      "export_sha256": "443c4d3c9f4bb0e7efeeff8f73e657a02e59961de19645b4407419e94cdb770f",
+      "modified": false
+    },
+    {
+      "source": "scripts/PhysicalObjectFollowSafetySmoke.swift",
+      "destination": "scripts/PhysicalObjectFollowSafetySmoke.swift",
+      "source_sha256": "b3278072eec7d640b398b18d0ab293810b835721b78423098c7435a7bd70b22c",
+      "export_sha256": "b3278072eec7d640b398b18d0ab293810b835721b78423098c7435a7bd70b22c",
+      "modified": false
+    },
+    {
+      "source": "scripts/PhysicalObjectFollowSafetySmoke.py",
+      "destination": "scripts/PhysicalObjectFollowSafetySmoke.py",
+      "source_sha256": "f34f93dd9e883752c01c02df0c69ad5fc916d770599afbd864b31bcd7ed8da0d",
+      "export_sha256": "d3e4a13a9187eeaaafa99235a98aa62536737012acf07b173b976a94036d741d",
+      "modified": true
+    },
+    {
+      "source": "scripts/PhysicalObjectCommandSmoke.swift",
+      "destination": "scripts/PhysicalObjectCommandSmoke.swift",
+      "source_sha256": "d1dea18ec715d41979ff66b0a15766d05528ce4c3f72f7c67b9fdbd4ad39be5e",
+      "export_sha256": "d1dea18ec715d41979ff66b0a15766d05528ce4c3f72f7c67b9fdbd4ad39be5e",
+      "modified": false
+    },
+    {
+      "source": "scripts/PhysicalObjectCommandSmoke.py",
+      "destination": "scripts/PhysicalObjectCommandSmoke.py",
+      "source_sha256": "1e10ea1ca4402ef25ffad3bbbb5efd13ed283e85d87876e7b9b0c0cbedadfc5a",
+      "export_sha256": "dfc946de252a385ca36823c23ae7c481bc8292572ee39a3ac2e24f80c7d75ef4",
+      "modified": true
+    },
+    {
+      "source": "scripts/PhysicalObjectRecoverySessionSmoke.swift",
+      "destination": "scripts/PhysicalObjectRecoverySessionSmoke.swift",
+      "source_sha256": "dd6dffb073c998fbbd778a3b10088ac55759ee70c04d7e68edfa307a07fca159",
+      "export_sha256": "dd6dffb073c998fbbd778a3b10088ac55759ee70c04d7e68edfa307a07fca159",
+      "modified": false
+    },
+    {
+      "source": "scripts/PhysicalObjectRecoverySessionSmoke.py",
+      "destination": "scripts/PhysicalObjectRecoverySessionSmoke.py",
+      "source_sha256": "729f3b041d4aed090a9038f705b999f7f7e08efe41351e8f873e1cb162131e9b",
+      "export_sha256": "009c22f11b042a88f6580a35a64bddc6c763e3fc6042fe85e5dc4b23f3863593",
+      "modified": true
+    },
+    {
+      "source": "scripts/PhysicalObjectSnapshotPartsSmoke.swift",
+      "destination": "scripts/PhysicalObjectSnapshotPartsSmoke.swift",
+      "source_sha256": "d2b411f3323f6db5bdf7aef8a7b742bbd4dff8fc1d4c6d20adaedee5ffdead9f",
+      "export_sha256": "d2b411f3323f6db5bdf7aef8a7b742bbd4dff8fc1d4c6d20adaedee5ffdead9f",
+      "modified": false
+    },
+    {
+      "source": "scripts/PhysicalObjectSnapshotPartsSmoke.py",
+      "destination": "scripts/PhysicalObjectSnapshotPartsSmoke.py",
+      "source_sha256": "68d764daba88523bd7a2c619c1c86f0fa313492955bea533534ce61aabec4d06",
+      "export_sha256": "1a40e17e0460f7c295e5d3563119e67b91f44c76e27b8a285b0d67b1aa17f0ca",
+      "modified": true
+    },
+    {
+      "source": "scripts/PhysicalObjectPartsSmoke.swift",
+      "destination": "scripts/PhysicalObjectPartsSmoke.swift",
+      "source_sha256": "21e694d48edf2e491bd6a9dd3e3d4d19cd2aacec5e539d99e72664f3d48f3de9",
+      "export_sha256": "21e694d48edf2e491bd6a9dd3e3d4d19cd2aacec5e539d99e72664f3d48f3de9",
+      "modified": false
+    },
+    {
+      "source": "scripts/PhysicalObjectPartsSmoke.py",
+      "destination": "scripts/PhysicalObjectPartsSmoke.py",
+      "source_sha256": "a610c54414bc71351d8b83b7252a30882431d9615f5d7d1d8f37bddd0ac3bff4",
+      "export_sha256": "a610c54414bc71351d8b83b7252a30882431d9615f5d7d1d8f37bddd0ac3bff4",
+      "modified": false
+    },
+    {
+      "source": "scripts/ObjectTrackingCoordinatorSmoke.swift",
+      "destination": "scripts/ObjectTrackingCoordinatorSmoke.swift",
+      "source_sha256": "40331959cdf695407f2b13355fc78d83ab60fb40ccbfc38a97a8a9fc43c2e305",
+      "export_sha256": "40331959cdf695407f2b13355fc78d83ab60fb40ccbfc38a97a8a9fc43c2e305",
+      "modified": false
+    },
+    {
+      "source": "scripts/ObjectTrackingCoordinatorSmoke.py",
+      "destination": "scripts/ObjectTrackingCoordinatorSmoke.py",
+      "source_sha256": "f63c85db2b662056aef3bd6ba76ac6851980f50c516b653315ba38f452ce3c68",
+      "export_sha256": "086b9ac9fa6444536febf853e7df3905987ae0ca99de6c7ee66dec6421f78d29",
+      "modified": true
+    },
+    {
+      "source": "KKGimbal/BLE/ProtocolParser.swift",
+      "destination": "Reference/KKGimbal/BLE/ProtocolParser.swift",
+      "source_sha256": "64acceecf75cf6a4aaa2b093ab6fd5dcee943a2c5c74805b0436bdd5e1c517a6",
+      "export_sha256": "efca6e0fad1b0518be598bb8ab1585158f9208656e098dbab33d8783cdef9d7d",
+      "modified": true
+    },
+    {
+      "source": "KKGimbal/Camera/CameraManager/CameraManager+Gesture.swift",
+      "destination": "Reference/KKGimbal/Camera/CameraManager/CameraManager+Gesture.swift",
+      "source_sha256": "2d960778d3d2ed799e3a5471320c1f4739eba1363796aa28483129ed4cf2aa7e",
+      "export_sha256": "2d960778d3d2ed799e3a5471320c1f4739eba1363796aa28483129ed4cf2aa7e",
+      "modified": false
+    },
+    {
+      "source": "KKGimbal/Camera/CameraManager/CameraManager+GestureRecognizerDelegate.swift",
+      "destination": "Reference/KKGimbal/Camera/CameraManager/CameraManager+GestureRecognizerDelegate.swift",
+      "source_sha256": "96af017c95f1d1516af01b35f028571088696b5a94135f53ab71c24add49c384",
+      "export_sha256": "96af017c95f1d1516af01b35f028571088696b5a94135f53ab71c24add49c384",
+      "modified": false
+    }
+  ]
+}

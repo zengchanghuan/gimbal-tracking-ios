@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "retrieved_on": "2026-10-16",
+  "comparison": "product_configuration_only; not same architecture or weights",
+  "labels": [
+    "cup",
+    "bottle",
+    "cell phone",
+    "cat",
+    "dog",
+    "car"
+  ],
+  "score_threshold": 0.35,
+  "maximum_results": 20,
+  "artifacts": [
+    {
+      "file": "efficientdet_lite0_float32.tflite",
+      "url": "https://storage.googleapis.com/mediapipe-models/object_detector/efficientdet_lite0/float32/1/efficientdet_lite0.tflite",
+      "sha256": "40338edf5ec70d43e318b0a716a84d4564cd1802759a7a07170c7e43796dbf58",
+      "bytes": 13836895,
+      "model_identifier": "efficientdet-lite0-float32-v1:40338edf5ec70d43e318b0a716a84d4564cd1802759a7a07170c7e43796dbf58",
+      "input": "RGB float32 [1,320,320,3]; normalization from embedded metadata",
+      "outputs": [
+        "float32 [1,19206,90] scores",
+        "float32 [1,19206,4] encoded locations"
+      ],
+      "postprocessing": "MediaPipeTasksVision 0.10.35 decodes DETECTOR_METADATA and performs SDK NMS; Swift does not override SDK NMS",
+      "license_evidence": "Embedded metadata names MediaPipe as author and has an empty license field. See NOTICE.md; SDK license must not be treated as a standalone grant for the model weights.",
+      "preset": "baseline",
+      "bundled_in_product": false
+    },
+    {
+      "file": "YOLOv3TinyFP16.mlmodel",
+      "url": "https://ml-assets.apple.com/coreml/models/Image/ObjectDetection/YOLOv3Tiny/YOLOv3TinyFP16.mlmodel",
+      "sha256": "73406178d0f5793d0d5d1e38274acd146a744c2245c9b63a11998a5015925dda",
+      "bytes": 17769580,
+      "model_identifier": "apple-yolov3-tiny-fp16-v2:73406178d0f5793d0d5d1e38274acd146a744c2245c9b63a11998a5015925dda",
+      "input": "RGB image 416x416; Vision scaleFill; physical pixel-buffer orientation up",
+      "outputs": [
+        "double [N,80] confidence",
+        "double [N,4] normalized center x,y,width,height"
+      ],
+      "postprocessing": "Bundled Core ML NMS pipeline; confidenceThreshold 0.35; iouThreshold 0.45; Vision recognized-object output",
+      "minimum_ios_from_compiled_model": "12.0",
+      "license_evidence": "Embedded license: Please see https://github.com/pjreddie/darknet for license information. Upstream original, meta, and MIT license texts are preserved.",
+      "preset": "baseline",
+      "bundled_in_product": false
+    },
+    {
+      "file": "efficientdet_lite2_float32.tflite",
+      "url": "https://storage.googleapis.com/mediapipe-models/object_detector/efficientdet_lite2/float32/1/efficientdet_lite2.tflite",
+      "sha256": "ad2abbf2b4e10585e15176fd7b5ef03c28dda959ae26fc142549fdd1814db91d",
+      "bytes": 23096891,
+      "model_identifier": "efficientdet-lite2-float32-v1:ad2abbf2b4e10585e15176fd7b5ef03c28dda959ae26fc142549fdd1814db91d",
+      "input": "RGB float32 [1,448,448,3]; normalization from metadata",
+      "postprocessing": "MediaPipeTasksVision 0.10.35 decodes DETECTOR_METADATA and performs SDK NMS; Swift does not override SDK NMS",
+      "license_evidence": "Embedded metadata names MediaPipe as author and has an empty license field. See NOTICE.md; SDK license must not be treated as a standalone grant for the model weights.",
+      "preset": "quality",
+      "bundled_in_product": true
+    },
+    {
+      "file": "YOLOv3FP16.mlmodel",
+      "url": "https://ml-assets.apple.com/coreml/models/Image/ObjectDetection/YOLOv3/YOLOv3FP16.mlmodel",
+      "sha256": "276afae53da362e25ad21c827f8a929a8512254b1343433d970e725a0de57d8f",
+      "bytes": 124207764,
+      "model_identifier": "apple-yolov3-fp16-v2:276afae53da362e25ad21c827f8a929a8512254b1343433d970e725a0de57d8f",
+      "input": "RGB image 416x416; quality CoreMLAll: Vision scaleFit (aspect preserved, system padding); CoreMLCPU: Vision scaleFill; physical pixel-buffer orientation up",
+      "postprocessing": "Bundled Core ML NMS pipeline; confidenceThreshold 0.35; iouThreshold 0.45; Vision recognized-object output",
+      "minimum_ios_from_compiled_model": "12.0",
+      "license_evidence": "Embedded license: Please see https://github.com/pjreddie/darknet for license information. Upstream original, meta, and MIT license texts are preserved.",
+      "preset": "quality",
+      "bundled_in_product": true,
+      "output_geometry": "Vision recognized-object boxes already normalized to the original physical image, lower-left origin; no manual unpadding"
+    }
+  ],
+  "default_preset": "quality",
+  "baseline_preserved_for_reproduction": true
+}

@@ -1,0 +1,20 @@
+name: Swift and tracking regressions
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify NanoTrack models
+        run: python3 scripts/verify_nanotrack.py
+      - name: Build and test public API
+        run: swift test
+      - name: Run deterministic production regressions
+        run: python3 scripts/check.py
+      - name: Run controller example
+        run: swift run tracking-demo
