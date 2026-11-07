@@ -2,7 +2,7 @@
 
 从实际 iOS 云台应用提取的跟踪源码：**物体跟踪、人脸与人形跟踪、手动目标跟踪，以及 ReplayKit 跨应用人脸跟踪**。
 
-[English](README.en.md) · [接入说明](docs/INTEGRATION.md) · [架构与边界](docs/ARCHITECTURE.md) · [第三方声明](THIRD_PARTY_NOTICES.md) · [验证记录](docs/VALIDATION.md)
+**中文** · [English](README.en.md) · [接入说明](docs/INTEGRATION.md) · [架构与边界](docs/ARCHITECTURE.md) · [第三方声明](THIRD_PARTY_NOTICES.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](CONTRIBUTING.md)
 
 ## 包含什么
 

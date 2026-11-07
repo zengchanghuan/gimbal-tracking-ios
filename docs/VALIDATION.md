@@ -1,34 +1,36 @@
-# Initial extraction validation
+# 首版提取验证记录
 
-Checked on 2026-11-07 against the 1.1.5 source baseline recorded in `SOURCE_MANIFEST.json`.
+**中文** · [English](VALIDATION.en.md)
 
-Environment: Apple Silicon macOS, Xcode 27.2 (27B52), Swift 6.4.2 in Swift 5 language mode. iOS compile checks targeted arm64 iOS 15 with the installed iPhoneOS SDK. Compatibility with every older Xcode release has not been measured.
+验证日期为 2026-11-07，使用 `SOURCE_MANIFEST.json` 记录的 1.1.5 源码基线。
 
-| Check | Result | Scope |
+环境：Apple Silicon macOS、Xcode 27.2（27B52）、Swift 6.4.2，采用 Swift 5 语言模式。iOS 编译检查使用已安装的 iPhoneOS SDK，目标为 arm64 iOS 15。尚未逐一验证所有旧版 Xcode 的兼容性。
+
+| 检查项 | 结果 | 覆盖范围 |
 | --- | --- | --- |
-| Swift Package build and public API tests | 3 tests passed | Original D1 hold bytes, confirmation, duplicate frames, target loss, stale frames and reset |
-| Controller replay example | Passed | Off-center target generates bounded control; loss returns hold |
-| ScreenFollowCoreSmoke | 457 assertions passed | Controller, packet framing, freshness and stability fixtures |
-| ScreenFollowCadenceSmoke | Passed across 24 trajectories | Frame admission and cadence under synthetic source timing |
-| ScreenFollowSourceTimingSmoke | 10 assertions passed | Old/new telemetry wire compatibility |
-| ScreenFollowStoreSmoke | 20 assertions passed | Missing/corrupt/expired session invitation and retry |
-| ScreenFollowDetectorComputeSmoke | 64 assertions passed | Injected compute selection, failure and CPU fallback |
-| PhysicalObjectFollowSafetySmoke | 2,581 assertions passed | Production safety decisions with fixture observations |
-| PhysicalObjectCommandSmoke | 160 assertions passed | Production command shaping and hold with transport/UI doubles |
-| PhysicalObjectRecoverySessionSmoke | 138 assertions passed | Recovery evidence routing with image/Vision doubles |
-| PhysicalObjectSnapshotPartsSmoke | 208 assertions passed | Session routing and part-fusion safety with doubles |
-| PhysicalObjectPartsSmoke | 32 assertions passed | Geometric part fusion policy |
-| iOS Swift module compilation | Passed | All package Swift sources, iOS target |
-| Native tracker syntax compilation | Passed | Both Objective-C++ implementations with OpenCV headers |
-| Physical session helper type checking | Passed | Swift session helpers with their real Objective-C interfaces |
-| NanoTrack model integrity | 3/3 matched | SHA-256 against the retained provenance |
-| Broadcast plist and entitlement templates | Passed | Property-list syntax, placeholder app identity |
+| Swift Package 构建与公开 API 测试 | 3 项测试通过 | 原始 D1 保持指令字节、目标确认、重复帧、目标丢失、过期帧与重置 |
+| 控制器回放示例 | 通过 | 偏离中心的目标产生有界控制量；丢失后返回保持指令 |
+| ScreenFollowCoreSmoke | 457 项断言通过 | 控制器、数据包分帧、时效性与稳定性测试样例 |
+| ScreenFollowCadenceSmoke | 24 条轨迹通过 | 合成源时序下的帧接纳与发送节奏 |
+| ScreenFollowSourceTimingSmoke | 10 项断言通过 | 新旧遥测格式的传输兼容性 |
+| ScreenFollowStoreSmoke | 20 项断言通过 | 会话准备记录缺失、损坏、过期及重试 |
+| ScreenFollowDetectorComputeSmoke | 64 项断言通过 | 注入的计算后端选择、失败与 CPU 回退 |
+| PhysicalObjectFollowSafetySmoke | 2,581 项断言通过 | 使用测试观测数据验证实际安全策略决策 |
+| PhysicalObjectCommandSmoke | 160 项断言通过 | 实际控制输出整形与保持逻辑；传输和 UI 使用测试替身 |
+| PhysicalObjectRecoverySessionSmoke | 138 项断言通过 | 恢复证据分发；图像与 Vision 使用测试替身 |
+| PhysicalObjectSnapshotPartsSmoke | 208 项断言通过 | 会话分发与部件融合安全策略；使用测试替身 |
+| PhysicalObjectPartsSmoke | 32 项断言通过 | 几何部件融合策略 |
+| iOS Swift 模块编译 | 通过 | Package 全部 Swift 源码，iOS 目标 |
+| 原生跟踪器语法编译 | 通过 | 使用 OpenCV 头文件检查两份 Objective-C++ 实现 |
+| 实物会话辅助代码类型检查 | 通过 | Swift 会话辅助代码与真实 Objective-C 接口 |
+| NanoTrack 模型完整性 | 3/3 匹配 | 与保留的来源记录核对 SHA-256 |
+| 广播 plist 与 entitlement 模板 | 通过 | 属性列表语法、占位应用标识 |
 
-The native checks used the source application's existing OpenCV 4.10 headers. The exported OpenCV build helper was adapted and shell-syntax checked; a fresh full OpenCV dependency build was not run during extraction. Native checks do not establish final app linkage.
+原生检查使用源应用现有的 OpenCV 4.10 头文件。导出的 OpenCV 构建脚本已调整并通过 shell 语法检查，但本次提取未从零重新构建全部 OpenCV 依赖。原生检查不代表最终 App 链接已通过。
 
-The first store test still expected the original product's Chinese localization. The extraction changed the product wording and the assertion to an actionable generic English fallback; session expiration semantics were preserved and the suite then passed. Existing `usesCPUOnly` API deprecation warnings remain in the compute-policy test.
+最初的存储测试仍期望原产品的中文本地化文案。提取时将产品提示及对应断言改为包含恢复操作说明的通用英文回退文案，保留会话过期语义，随后测试通过。计算策略测试仍有 `usesCPUOnly` API 的弃用警告。
 
-## Reproduce
+## 复现方法
 
 ```bash
 swift test
@@ -36,13 +38,13 @@ swift run tracking-demo
 python3 scripts/check.py
 python3 scripts/verify_nanotrack.py
 
-# After building OpenCV, or with --opencv-headers pointing to your existing build:
+# 先构建 OpenCV，或通过 --opencv-headers 指向已有构建的头文件：
 python3 scripts/check_native.py
 
-# Optional extra image-based fixtures, not run as part of the initial extraction:
+# 可选的额外图像测试，首次提取时未运行：
 python3 scripts/check.py --vision
 ```
 
-The optional Vision fixtures, fresh optional-model downloads, complete reference host app build, ReplayKit capture, camera accuracy, BLE delivery, physical motor response, sustained performance and App Store signing were **not** revalidated for this extraction. The reference host files are integration material, not a standalone app target. Do not read prior application test comments or deterministic fixture counts as acceptance evidence for a new host/device.
+本次提取**未重新验证**可选 Vision 图像测试、可选模型的全新下载、完整参考宿主 App 构建、ReplayKit 采集、相机识别准确率、BLE 送达、物理电机响应、持续性能和 App Store 签名。参考宿主文件用于接入，不是独立 App target。不能将原应用测试注释或确定性测试中的断言数量，视为新宿主或新设备的验收证据。
 
-The GitHub Actions workflow runs package tests, deterministic regressions, model verification and the replay example. Its current status is available from the repository Actions page; local results above are independent of hosted CI availability.
+GitHub Actions 工作流运行 Package 测试、确定性回归、模型校验和回放示例。当前线上结果可在仓库 Actions 页面查看；以上本地结果独立于托管 CI 的可用状态。

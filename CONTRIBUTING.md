@@ -1,9 +1,11 @@
-# Contributing
+# 贡献指南
 
-Describe the concrete tracking failure, capture geometry, platform, source revision and expected behavior. Prefer a minimal synthetic fixture; do not attach private screen recordings, face images, device identifiers or credentials without permission.
+**中文** · [English](CONTRIBUTING.en.md)
 
-Run `swift test`, `python3 scripts/check.py` and `python3 scripts/verify_nanotrack.py` on macOS before submitting a change. `python3 scripts/check.py --vision` additionally exercises Apple Vision with synthetic images and is environment-dependent. Native changes need an iOS Objective-C++ build with OpenCV; camera/ReplayKit/BLE changes need device validation.
+请描述具体的跟踪故障、采集几何条件、运行平台、源码版本和预期行为。优先提供最小的合成测试样例；未经许可，不要附带私密录屏、人脸图片、设备标识符或凭据。
 
-Keep coordinate conventions, monotonic timestamps, target identity checks and stale-command invalidation explicit. Distinguish policy fixtures, image replay, native device tests and physical motor acceptance in reports. A deterministic test pass is not a tracking-accuracy benchmark.
+提交修改前，请在 macOS 运行 `swift test`、`python3 scripts/check.py` 和 `python3 scripts/verify_nanotrack.py`。`python3 scripts/check.py --vision` 会额外使用合成图像测试 Apple Vision，其行为依赖运行环境。原生代码修改需要结合 OpenCV 进行 iOS Objective-C++ 构建；涉及相机、ReplayKit 或 BLE 的修改需要真机验证。
 
-Project-owned contributions use the root MIT license. Preserve existing authorship and third-party licenses. Do not add model weights without provenance, redistribution terms and a pinned digest.
+请明确保留坐标约定、单调时间戳、目标身份验证和旧指令失效机制。在报告中区分策略测试样例、图像回放、真机原生测试与物理电机验收。确定性测试通过不代表跟踪准确率达到某个基准。
+
+项目自有代码的贡献采用根目录的 MIT 许可证。保留现有作者署名与第三方许可。新增模型权重时，需要提供来源、再分发条款和固定的哈希摘要。

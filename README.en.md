@@ -1,22 +1,73 @@
 # Gimbal Tracking for iOS
 
-iOS tracking code extracted from a gimbal camera application: object tracking, face/person selection, manual target tracking, and ReplayKit cross-app face following.
+iOS tracking code extracted from a gimbal camera application: **object tracking, face/person tracking, manual target tracking, and ReplayKit cross-app face following**.
 
-[中文](README.md) · [Integration](docs/INTEGRATION.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
+[中文](README.md) · **English** · [Integration](docs/INTEGRATION.en.md) · [Architecture](docs/ARCHITECTURE.en.md) · [Third-party notices](THIRD_PARTY_NOTICES.en.md) · [Validation](docs/VALIDATION.en.md) · [Contributing](CONTRIBUTING.en.md)
 
-The repository combines a buildable Swift package with integration references. The package exposes `FaceTracker`, `FollowController`, and an optional Core ML `ObjectDetector`. NanoTrack V2 and appearance recovery are Objective-C++ sources integrated through Xcode and OpenCV. Camera, UI, ReplayKit and BLE references require a host application; they are not a standalone app or a fully packaged SDK.
+## Included capabilities
+
+| Capability | Implementation | Integration |
+| --- | --- | --- |
+| Face tracking | Apple Vision detection, sequence tracking, periodic validation and brief-loss handling | Swift Package `FaceTracker` |
+| Follow control | Target confirmation, dead zones, stabilization, slew limits, stale-frame stops and yaw/pitch output | Swift Package `FollowController` |
+| Object discovery | Core ML YOLOv3 / optional MediaPipe EfficientDet | `ObjectDetector` and detector coordinator sources |
+| Physical object tracking | NanoTrack V2, a fixed initial template, appearance verification, reacquisition and foreground-part fusion | `NativeTracking/` and camera integration references |
+| Face/person selection and manual targets | Automatic selection, manual locks, Vision rectangles, coordinate conversion and follow control | `Reference/KKGimbal/Camera/` |
+| Cross-app following | ReplayKit → local frame channel → Vision → gimbal control | `Reference/GimbalScreenFollowBroadcast/` and main-app references |
+
+The initial release combines a **buildable Swift core library with original app integration references**. The Swift Package is directly usable. CameraManager, UI and BLE interfaces in `Reference/` need a host application and do not form a standalone app. The Objective-C++ NanoTrack component is integrated as Xcode source and requires OpenCV.
+
+## Quick start
+
+Requirements: macOS, full Xcode and Swift 5.9+. The core library targets iOS 15+ / macOS 13+. Actual camera and cross-app behavior require iPhone validation.
 
 ```bash
+git clone https://github.com/zengchanghuan/gimbal-tracking-ios.git
+cd gimbal-tracking-ios
 swift test
 swift run tracking-demo
 python3 scripts/check.py
 python3 scripts/verify_nanotrack.py
 ```
 
-Use macOS with full Xcode and Swift 5.9+. The Swift package targets iOS 15+ and macOS 13+. The example replays synthetic detections and prints commands without connecting hardware. Real camera, ReplayKit and motor behavior require device validation.
+`tracking-demo` replays a deterministic target trajectory and target loss, printing control output without connecting hardware.
 
-All image boxes use normalized lower-left coordinates. Timestamps use monotonic system uptime. The host must expire motion when frames stop, invalidate stale queued writes, and explicitly map coordinates and command signs for its camera and gimbal. Commands use the original device's wire units, not angular units.
+Add the repository URL in Xcode's Package Dependencies and select the `GimbalTracking` product:
 
-The native object tracker includes fixed-template NanoTrack inference, appearance verification, original-target reacquisition and foreground-part helpers. Optional semantic discovery uses Core ML YOLOv3 or MediaPipe EfficientDet; large optional detection models are downloaded separately with pinned SHA-256 verification. NanoTrack weights are bundled with their upstream license and provenance.
+```swift
+import Foundation
+import GimbalTracking
 
-Project-owned code is under [MIT](LICENSE). Third-party components retain their respective licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). No original repository history, signing credentials or live-camera recordings are included.
+var controller = FollowController()
+let now = ProcessInfo.processInfo.systemUptime
+let command = controller.observe(
+    boxes: [TrackingBox(CGRect(x: 0.65, y: 0.4, width: 0.2, height: 0.2))],
+    frameID: 1, capturedAt: now, now: now
+)
+```
+
+A single frame does not immediately confirm a target. Subsequent calls must supply real observations from new images, increasing frame IDs and capture timestamps. All boxes use normalized image coordinates with a lower-left origin; the host explicitly handles preview mirroring and hardware control direction. See the [integration guide](docs/INTEGRATION.en.md) for a complete face pipeline and NanoTrack setup.
+
+## Repository layout
+
+```text
+Sources/GimbalTracking/    Swift core, Vision, Core ML, controllers and public API
+NativeTracking/           NanoTrack / OpenCV appearance verification and recovery
+Models/                   NanoTrack weights, provenance, licenses and optional detector downloader
+Reference/                Camera, target selection, ReplayKit, UI and BLE integration references
+Examples/TrackingDemo/    Controller replay without hardware
+Tests/                    Public API regressions
+scripts/                  Source regressions, model verification and OpenCV build
+docs/                     Architecture, integration, validation scope and source manifest
+```
+
+## Operating limits
+
+- This is an image-tracking and gimbal-following implementation. It does not establish reliability for every object, occlusion, lighting condition or device. Object recovery still requires distinguishable appearance evidence.
+- The host must stop movement and clear stale queued commands when a target is lost, capture stops, frames expire, sessions change or BLE disconnects. Controller output uses the original hardware's protocol units, not degrees or angular velocity.
+- Cross-app mode processes frames from a ReplayKit broadcast explicitly started by the user. The reference supports portrait orientation, and background execution is constrained by the iOS lifecycle. You need your own App Group, signing and BLE implementation.
+- Automated regressions cover code and policy; they are not camera, BLE, physical motor or sustained-performance acceptance tests. See [VALIDATION.en.md](docs/VALIDATION.en.md) for the measured scope.
+
+## License
+
+Project-owned code is under [MIT](LICENSE). NanoTrack weights and upstream implementation, OpenCV, MediaPipe and optional detection models retain their respective terms; see [THIRD_PARTY_NOTICES.en.md](THIRD_PARTY_NOTICES.en.md). Original source author headers are retained. The repository does not include the original app's full Git history, signing configuration, account data, product assets or live-camera test recordings.

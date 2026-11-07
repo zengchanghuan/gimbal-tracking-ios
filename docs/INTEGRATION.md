@@ -1,16 +1,18 @@
-# Integration
+# 技术接入文档
+
+**中文** · [English](INTEGRATION.en.md)
 
 ## 1. Swift Package
 
-Add `https://github.com/zengchanghuan/gimbal-tracking-ios.git` through Xcode's Package Dependencies and select the `GimbalTracking` library. The package uses only Apple frameworks by default. Public APIs are in `Sources/GimbalTracking/PublicAPI.swift`; other types retain internal visibility.
+在 Xcode 的 Package Dependencies 中添加 `https://github.com/zengchanghuan/gimbal-tracking-ios.git`，选择 `GimbalTracking` 库。默认只依赖 Apple 系统框架。公开 API 位于 `Sources/GimbalTracking/PublicAPI.swift`，其余类型保留 internal 可见性。
 
-The macOS executable demonstrates the controller without camera access:
+macOS 命令行示例可以在不使用相机的情况下演示控制器：
 
 ```bash
 swift run tracking-demo
 ```
 
-A minimal face-analysis/control wrapper follows. Own the entire instance on one serial analysis queue; acquire the image and capture timestamp in your camera pipeline.
+下面是最小的人脸分析与控制封装。整个实例应由同一条串行分析队列持有和调用；图像与采集时间戳应在相机管线中取得。
 
 ```swift
 import CoreGraphics
@@ -35,66 +37,66 @@ final class FaceFollowPipeline {
 }
 ```
 
-The caller handles errors by stopping motion and resetting its session. It also sets a frame-expiry watchdog and validates the current session immediately before a BLE write. `.hold` means zero motion. A `nil` result means the frame was ignored, not renewed permission to keep moving. `yawSign`/`pitchSign` must match your camera mirroring and hardware. Command units are protocol units, not degrees or angular velocity.
+调用方应在出错时停止运动并重置会话，还应设置帧过期看门狗，并在执行 BLE 写入前再次验证当前会话。`.hold` 表示零运动；`nil` 表示该帧被忽略，不会延长继续运动的授权。`yawSign`、`pitchSign` 必须与相机镜像和硬件方向匹配。控制量使用原协议单位，不是角度或角速度。
 
-## 2. Native object tracking
+## 2. 原生实物跟踪
 
-The Objective-C++ tracker is distributed as source, outside the Swift Package target.
+Objective-C++ 跟踪器以源码形式提供，不属于 Swift Package 的编译目标。
 
-1. Build OpenCV using `bash scripts/build_opencv.sh`. This requires full Xcode, CMake, Python 3, network access and sufficient build space. It builds device/simulator archives and writes `Dependencies/OpenCV/OpenCVStitching.xcframework`.
-2. Add that XCFramework to the host app target. Add `NativeTracking/*.mm` to Compile Sources, retain the `.inc` files beside them, and add the two headers to the project. Set C++ language standard to C++17 and enable Objective-C ARC.
-3. Add the selected XCFramework slice's `Headers/opencv4` directory to Header Search Paths. Link the Apple frameworks referenced by the sources and the C++ runtime; the static OpenCV archive also requires `libz` for codec dependencies. Keep the third-party notices accompanying your build.
-4. Import `CMNanoTrackTracker.h` and `CMPhysicalObjectPatchTracker.h` in the app's Objective-C bridging header.
-5. Add `Models/NanoTrack` as a folder resource named **NanoTrack**, preserving `template.onnx`, `search.onnx` and `head.onnx` beneath it. The loader searches `Bundle.main/NanoTrack`; placing the files flat in the bundle or only inside an SPM resource bundle will not work.
-6. Run `python3 scripts/verify_nanotrack.py` before packaging.
+1. 运行 `bash scripts/build_opencv.sh` 构建 OpenCV。需要完整 Xcode、CMake、Python 3、网络连接和足够的构建空间。脚本构建真机与模拟器静态库，输出 `Dependencies/OpenCV/OpenCVStitching.xcframework`。
+2. 将该 XCFramework 加入宿主 App target。将 `NativeTracking/*.mm` 加入 Compile Sources，保留同目录的 `.inc` 文件，并将两个头文件加入工程。将 C++ 标准设置为 C++17，启用 Objective-C ARC。
+3. 将当前 XCFramework slice 的 `Headers/opencv4` 目录加入 Header Search Paths。链接源码引用的 Apple 框架和 C++ 运行时；静态 OpenCV 库的编解码依赖还需要 `libz`。分发构建产物时保留第三方声明。
+4. 在 App 的 Objective-C 桥接头中导入 `CMNanoTrackTracker.h` 和 `CMPhysicalObjectPatchTracker.h`。
+5. 将 `Models/NanoTrack` 作为名为 **NanoTrack** 的文件夹资源加入 App，保留其下的 `template.onnx`、`search.onnx`、`head.onnx`。加载器查找的是 `Bundle.main/NanoTrack`；将文件平铺到 bundle 根目录，或只放在 SPM 资源 bundle 中，都无法按现有路径加载。
+6. 打包前运行 `python3 scripts/verify_nanotrack.py`。
 
-The native API uses normalized Vision rectangles. A `candidate(in:)` result is a proposal. Preserve application identity checks before `acceptVerifiedRect(_:)` or `approveMovingFrame(at:)`; see `CameraManager+ObjectRecognition.swift`. Do not route an unverified candidate directly to motors.
+原生 API 使用 Vision 归一化矩形坐标。`candidate(in:)` 返回的是候选位置；调用 `acceptVerifiedRect(_:)` 或 `approveMovingFrame(at:)` 前，必须保留应用层的目标身份验证，详见 `CameraManager+ObjectRecognition.swift`。不要将未验证的候选位置直接用于电机控制。
 
-For the complete original physical-object control flow, integrate the reference camera extension and its state into your own camera host. The thin Swift package facade intentionally does not claim to wrap this whole flow.
+若要使用完整的原实物跟随流程，需要把参考相机扩展及其状态接入自己的相机宿主。精简的 Swift Package 公开接口尚未封装这条完整流程。
 
-## 3. Camera face, human and manual-target tracking
+## 3. 相机人脸、人形与手动目标跟踪
 
-Read these files together:
+建议结合以下文件阅读：
 
-- `Reference/KKGimbal/Camera/CameraManager/CameraManager+FaceTracking.swift`: auto selection, manual locks, human fallback and gesture-owner selection input.
-- `CameraManager+Tracking.swift`: preview geometry, manual selection, Vision requests and native camera control shaping.
-- `CameraManager+ObjectRecognition.swift`: physical tracking sessions, confirmation/recovery, frame watchdog and selection UI.
-- `CameraManager.swift`: tracking-state declarations extracted from the host.
-- `CameraManager+AVCaptureDelegate.swift`: original capture routing, retained as context.
-- `CameraManager+Gesture.swift`, `CameraManager+GestureRecognizerDelegate.swift`: drag selection, tap selection and optional gesture-driven start/stop routing.
+- `Reference/KKGimbal/Camera/CameraManager/CameraManager+FaceTracking.swift`：自动选择、手动锁定、人形回退，以及通过手势位置选择对应人物的输入。
+- `CameraManager+Tracking.swift`：预览几何、手动选框、Vision 请求、相机跟随控制输出整形。
+- `CameraManager+ObjectRecognition.swift`：实物跟踪会话、确认与恢复、帧看门狗、选择 UI。
+- `CameraManager.swift`：从宿主提取的跟踪状态声明。
+- `CameraManager+AVCaptureDelegate.swift`：保留作上下文参考的原采集分发逻辑。
+- `CameraManager+Gesture.swift`、`CameraManager+GestureRecognizerDelegate.swift`：拖动选框、点击选择，以及可选的手势启动与停止分发。
 
-The reference extensions still refer to host properties, delegates, localized strings, camera modes and the BLE manager. Supply your own implementations of those boundaries. They also include optional Hitchcock/gesture hooks; the full recording UI, gesture SDK, app configuration and other camera features are not exported.
+这些参考扩展仍引用宿主属性、代理、本地化字符串、相机模式和 BLE 管理器，需要你实现相应接口。代码还包含可选的希区柯克效果与手势接口；完整录制 UI、手势 SDK、应用配置及其他相机功能未随源码导出。
 
-When integrating reference sources, compile the relevant files from `Sources/GimbalTracking/` into the same host module so their internal types are available. Do not also compile a second copy through SPM. Package consumers should use the public facade instead.
+接入参考源码时，应将 `Sources/GimbalTracking/` 中相关文件编译到同一宿主模块，使其 internal 类型可见。不要同时通过 SPM 再编译一份相同源码。直接使用 Package 的项目应调用公开 API。
 
-## 4. Optional semantic object discovery
+## 4. 可选的语义物体发现
 
 ```bash
 python3 Models/download_models.py
 python3 Models/download_models.py --verify-only
 ```
 
-The downloader retrieves all pinned baseline/quality artifacts and refuses changed bytes. Check `Models/NOTICE.md` for publisher terms and source sizes first. The quality configuration uses YOLOv3 FP16 and EfficientDet-Lite2; the default package does not download or bundle them automatically.
+下载脚本会取得所有已固定版本的基线与质量配置模型，并拒绝哈希不匹配的内容。请先查看 `Models/NOTICE.md` 中的发布方条款与文件大小。质量配置使用 YOLOv3 FP16 和 EfficientDet-Lite2；默认 Package 不会自动下载或打包这些模型。
 
-For Core ML, add `YOLOv3FP16.mlmodel` to the host app target so Xcode compiles `YOLOv3FP16.mlmodelc` into the main bundle, then initialize `ObjectDetector`. A missing model throws an error. The `ObjectDetectionModelPreset=baseline` Info.plist option selects the documented Tiny model instead.
+使用 Core ML 时，将 `YOLOv3FP16.mlmodel` 加入宿主 App target，让 Xcode 将其编译为主 bundle 中的 `YOLOv3FP16.mlmodelc`，然后初始化 `ObjectDetector`。模型缺失会抛出错误。Info.plist 的 `ObjectDetectionModelPreset=baseline` 配置可切换为文档所述的 Tiny 模型。
 
-For MediaPipe, use source integration and add `MediaPipeTasksVision` 0.10.35 to the same target using CocoaPods. `MediaPipeObjectDetector.swift` and its factory branch compile only when that module is available. Add the selected `.tflite` model to the host bundle. GPU inference requires a physical device and compatible pixel buffers; there is no silent backend substitution.
+使用 MediaPipe 时，采用源码接入，并通过 CocoaPods 将 `MediaPipeTasksVision` 0.10.35 加入同一 target。仅当该模块可用时，`MediaPipeObjectDetector.swift` 及其工厂分支才参与编译。将选定的 `.tflite` 模型加入宿主 bundle。GPU 推理需要真机和兼容的像素缓冲区；系统不会静默改用其他后端。
 
-## 5. Cross-app ReplayKit tracking
+## 5. ReplayKit 跨应用跟踪
 
-This is a host-app plus Broadcast Upload Extension integration, not an SPM-only capability.
+这一能力需要宿主 App 与 Broadcast Upload Extension 配合，不能仅靠添加 SPM 依赖启用。
 
-1. Create your own iOS app and Broadcast Upload Extension targets. Copy the Swift files in `Reference/GimbalScreenFollowBroadcast/` into the extension. Use its Info.plist/entitlements as templates, with your own signing identities.
-2. Set your own shared App Group in both targets' entitlements and `ScreenFollowConstants.appGroup` in `ScreenFollowModels.swift`. Set `ScreenFollowConstants.extensionBundleID` to the extension bundle identifier. The supplied `com.example...` identifiers are placeholders.
-3. Compile `ScreenFollowModels.swift` and `ScreenFollowStore.swift` into both targets. The main target also needs `ScreenFollowController.swift`, `ScreenFollowFaceAnalyzer.swift` and the main-app integration reference. Keep extension-safe code separate from UIKit/UIApplication-dependent main-app code.
-4. Adapt `ScreenFollowMainAccess.swift` to your existing BLE session owner. Its `KKBLEManager` calls are a required integration boundary. Preserve session exclusion, freshness checks, thermal/background expiry handling and stop delivery.
-5. Replace the setup UI's host dependencies (`HomeFeatureEntryButton`, localization helpers, product artwork and settings UI). Set `KKScreenFollowEnabled` to the string `YES` if retaining the supplied feature gate.
-6. Explain screen capture to the user and use the system broadcast picker. Configure only the background modes your host actually uses. Validate the complete lifecycle on a device with your provisioning profiles.
+1. 创建自己的 iOS App 与 Broadcast Upload Extension target，将 `Reference/GimbalScreenFollowBroadcast/` 中的 Swift 文件复制到扩展。以其中的 Info.plist 和 entitlements 为模板，使用自己的签名配置。
+2. 在两个 target 的 entitlements，以及 `ScreenFollowModels.swift` 的 `ScreenFollowConstants.appGroup` 中配置自己的共享 App Group。将 `ScreenFollowConstants.extensionBundleID` 设为扩展的 Bundle ID。提供的 `com.example...` 均为占位标识符。
+3. 将 `ScreenFollowModels.swift` 和 `ScreenFollowStore.swift` 编译到两个 target。主 target 还需要 `ScreenFollowController.swift`、`ScreenFollowFaceAnalyzer.swift` 和主应用集成参考代码。扩展可用的代码应与依赖 UIKit、UIApplication 的主应用代码分开。
+4. 将 `ScreenFollowMainAccess.swift` 适配到现有 BLE 会话管理器。对 `KKBLEManager` 的调用是必须实现的集成接口。保留会话互斥、时效性检查、温度与后台执行过期处理，以及停止指令发送逻辑。
+5. 替换设置 UI 对宿主的依赖，包括 `HomeFeatureEntryButton`、本地化辅助方法、产品图片和设置界面。若保留原功能开关，将 `KKScreenFollowEnabled` 设为字符串 `YES`。
+6. 向用户说明屏幕采集行为，并使用系统广播选择器。只配置宿主实际使用的后台模式，使用自己的描述文件在真机验证完整生命周期。
 
-The reference extension sends bounded JPEG frames over a loopback connection with session identity and one in-flight frame/ACK. Analysis and BLE remain in the main app. It currently expects portrait streaming; rotation, capture gaps, background expiration and disconnected BLE must stop movement. The host's camera path must release ownership while cross-app tracking owns the session.
+参考扩展通过本机回环连接发送有大小限制的 JPEG 帧，并携带会话标识；帧与 ACK 机制保证最多只有一帧在途。分析与 BLE 留在主应用中。当前实现要求竖屏直播；旋转、断帧、后台执行过期和蓝牙断开都必须停止运动。跨应用跟踪占用会话时，宿主相机链路必须释放控制权。
 
-## 6. Hardware transport
+## 6. 硬件传输
 
-`FollowCommand.encodedD1Packet()` exposes the original D1 packet encoding, including saturation. It is not a universal gimbal protocol. The camera reference uses its own original scale/front-camera transformation in `Reference/KKGimbal/BLE/ProtocolParser.swift`.
+`FollowCommand.encodedD1Packet()` 提供原始 D1 数据包编码，包括数值限幅。它不是通用云台协议。相机参考链路在 `Reference/KKGimbal/BLE/ProtocolParser.swift` 中使用自身的原始缩放与前置相机方向转换。
 
-The BLE reference contains tracking-specific session and queue logic but omits scanning, reconnect, firmware upgrade and the full ATT serializer. Adapt it to your transport and check authorization at the actual write. Test hold/exit, disconnect, reconnect, backpressure and expiry before motor use.
+BLE 参考代码包含跟踪专用的会话与队列逻辑，但未包含扫描、重连、固件升级和完整 ATT 写入串行化机制。应将其适配到自己的传输层，并在实际写入时检查授权。驱动电机前，验证保持、退出、断连、重连、背压和过期处理。
